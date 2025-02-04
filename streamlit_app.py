@@ -229,13 +229,13 @@ def winner_page():
         st.markdown("</div>", unsafe_allow_html=True)
 
 # Sidebar navigation
-st.sidebar.title("Navigation")
+#st.sidebar.title("Navigation")
 pages = {
     "📤Upload CSV": "upload",
     "🗺️View Map": "map",
     "🏆Winner": "winner"
 }
-selection = st.sidebar.radio("Go to", list(pages.keys()))
+selection = st.sidebar.radio("ETEC+", list(pages.keys()))
 st.session_state.page = pages[selection]
 
 # Page routing
