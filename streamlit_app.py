@@ -148,7 +148,7 @@ def map_page():
               longitude='lon',
               color='color',
               size='size',
-              zoom=5
+              zoom=5,
               height=800)
         st.markdown("</div>", unsafe_allow_html=True)
     
@@ -212,7 +212,7 @@ def winner_page():
               longitude='lon',
               color='color',
               size='size',
-              zoom=5
+              zoom=5,
               height=800)
         st.markdown("</div>", unsafe_allow_html=True)
 
