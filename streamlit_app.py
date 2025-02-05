@@ -148,7 +148,8 @@ def map_page():
               longitude='lon',
               color='color',
               size='size',
-              zoom=12)
+              zoom=5
+              height=800)
         st.markdown("</div>", unsafe_allow_html=True)
     
     # Fixed Draw Winner button
@@ -211,7 +212,8 @@ def winner_page():
               longitude='lon',
               color='color',
               size='size',
-              zoom=12)
+              zoom=5
+              height=800)
         st.markdown("</div>", unsafe_allow_html=True)
 
     # Leaderboard Section
