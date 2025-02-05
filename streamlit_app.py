@@ -44,7 +44,6 @@ st.markdown("""
         margin: 15px 0;
         background-color: #0E1117;
     }
-            
 </style>
 """, unsafe_allow_html=True)
 
@@ -119,7 +118,7 @@ def upload_page():
 
 # Page 2: Map View
 def map_page():
-    st.title("🗺️ Players Map")
+    st.title("🗺️ Locations Map")
     
     if st.session_state.participants is None:
         st.error("No data available. Please upload a CSV first.")
@@ -149,8 +148,7 @@ def map_page():
               longitude='lon',
               color='color',
               size='size',
-              zoom=5,
-              height=800)
+              zoom=12)
         st.markdown("</div>", unsafe_allow_html=True)
     
     # Fixed Draw Winner button
@@ -229,13 +227,13 @@ def winner_page():
         st.markdown("</div>", unsafe_allow_html=True)
 
 # Sidebar navigation
-#st.sidebar.title("Navigation")
+st.sidebar.title("Navigation")
 pages = {
-    "📤Upload CSV": "upload",
-    "🗺️View Map": "map",
-    "🏆Winner": "winner"
+    "Upload CSV": "upload",
+    "View Map": "map",
+    "Winner": "winner"
 }
-selection = st.sidebar.radio("ETEC+", list(pages.keys()))
+selection = st.sidebar.radio("Go to", list(pages.keys()))
 st.session_state.page = pages[selection]
 
 # Page routing
