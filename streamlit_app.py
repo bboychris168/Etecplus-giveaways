@@ -58,6 +58,7 @@ if 'winner' not in st.session_state:
 # Constants
 GIVEAWAY_LOCATION = (-33.867582661116245, 151.05560569089798)
 
+@st.cache_data
 def calculate_distance(lat1, lon1, lat2, lon2):
     """Calculate distance using Haversine formula (in km)"""
     lat1 = math.radians(lat1)
@@ -118,7 +119,7 @@ def upload_page():
 
 # Page 2: Map View
 def map_page():
-    st.title("🗺️ Locations Map")
+    st.title("🗺️ Players Map")
     
     if st.session_state.participants is None:
         st.error("No data available. Please upload a CSV first.")
@@ -148,8 +149,7 @@ def map_page():
               longitude='lon',
               color='color',
               size='size',
-              zoom=5,
-              height=800)
+              zoom=5)
         st.markdown("</div>", unsafe_allow_html=True)
     
     # Fixed Draw Winner button
@@ -157,7 +157,7 @@ def map_page():
         if st.session_state.participants is not None:
             st.session_state.winner = st.session_state.participants.loc[
                 st.session_state.participants['distance_km'].idxmin()
-            ]
+            ].copy()
             st.session_state.page = 'winner'
             st.rerun()
 
@@ -212,8 +212,7 @@ def winner_page():
               longitude='lon',
               color='color',
               size='size',
-              zoom=5,
-              height=800)
+              zoom=12)
         st.markdown("</div>", unsafe_allow_html=True)
 
     # Leaderboard Section
@@ -231,12 +230,19 @@ def winner_page():
 # Sidebar navigation
 st.sidebar.title("Navigation")
 pages = {
-    "Upload CSV": "upload",
-    "View Map": "map",
-    "Winner": "winner"
+    "📤Upload CSV": "upload",
+    "🗺️View Map": "map",
+    "🏆Winner": "winner"
 }
-selection = st.sidebar.radio("Go to", list(pages.keys()))
-st.session_state.page = pages[selection]
+
+# Get current page index for radio selection
+page_names = list(pages.keys())
+page_values = list(pages.values())
+current_index = page_values.index(st.session_state.page) if st.session_state.page in page_values else 0
+
+# Display radio and update page
+selected_page = st.sidebar.radio("Go to", page_names, index=current_index)
+st.session_state.page = pages[selected_page]
 
 # Page routing
 if st.session_state.page == 'upload':
