@@ -149,7 +149,7 @@ def map_page():
               longitude='lon',
               color='color',
               size='size',
-              zoom=5)
+              zoom=12)
         st.markdown("</div>", unsafe_allow_html=True)
     
     # Fixed Draw Winner button
